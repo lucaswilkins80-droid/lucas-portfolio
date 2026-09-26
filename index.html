@@ -4,518 +4,816 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Developer Portfolio</title>
+  <meta name="description" content="Black and white portfolio for a young web and Discord bot developer." />
   <style>
-    :root {
-      --bg-1: #070b16;
-      --bg-2: #101827;
-      --glass: rgba(255, 255, 255, 0.07);
-      --glass-strong: rgba(255, 255, 255, 0.11);
-      --border: rgba(255, 255, 255, 0.15);
-      --text: #edf6ff;
-      --muted: #bfd0e8;
-      --accent: #8ec5ff;
-      --accent-2: #7ef0d6;
-      --shadow: rgba(0, 0, 0, 0.28);
+    :root{
+      --bg: #050505;
+      --panel: rgba(255,255,255,0.04);
+      --panel-strong: rgba(255,255,255,0.08);
+      --line: rgba(255,255,255,0.12);
+      --text: #f5f5f5;
+      --muted: #d0d0d0;
+      --soft: #a7a7a7;
+      --white: #ffffff;
+      --shadow: rgba(0,0,0,0.45);
+      --maxw: 1200px;
     }
 
-    * {
+    *{
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
+    html{
       scroll-behavior: smooth;
     }
 
-    body {
+    body{
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(142, 197, 255, 0.18), transparent 26%),
-        radial-gradient(circle at bottom right, rgba(126, 240, 214, 0.15), transparent 25%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 18%),
+        linear-gradient(135deg, #050505, #0d0d0d 42%, #070707);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    .bg-orb {
+    img{
+      max-width: 100%;
+      display: block;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .noise{
       position: fixed;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.25;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black 100%, transparent 100%);
       pointer-events: none;
+      opacity: 0.3;
       z-index: 0;
     }
 
-    .orb-1 {
-      background: #4ea3ff;
-      top: 8%;
-      left: 10%;
-    }
-
-    .orb-2 {
-      background: #5fead2;
-      bottom: 8%;
-      right: 12%;
-    }
-
-    .container {
+    .container{
       position: relative;
       z-index: 1;
-      width: min(1180px, calc(100% - 24px));
+      width: min(var(--maxw), calc(100% - 26px));
       margin: 0 auto;
-      padding: 26px 0 60px;
     }
 
-    .glass {
-      background: var(--glass);
-      border: 1px solid var(--border);
+    .glass{
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--line);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
-      border-radius: 26px;
+      box-shadow: 0 20px 60px var(--shadow);
     }
 
-    header {
+    header{
+      position: sticky;
+      top: 12px;
+      z-index: 40;
+      width: min(var(--maxw), calc(100% - 20px));
+      margin: 18px auto 0;
+      padding: 16px 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav{
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 16px 22px;
-      margin-top: 8px;
+      gap: 20px;
     }
 
-    nav {
+    .nav-links{
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 22px;
       margin: 0 auto;
     }
 
-    nav a {
+    .nav-links a{
+      font-size: 0.82rem;
       color: var(--muted);
-      text-decoration: none;
-      font-size: 0.92rem;
-      transition: color 0.2s ease;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
 
-    nav a:hover {
-      color: var(--text);
+    .nav-links a:hover{
+      color: var(--white);
+      transform: translateY(-1px);
     }
 
-    .discord-btn,
-    .primary-btn,
-    .secondary-btn,
-    .cta-btn {
+    .discord-btn{
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
+      padding: 10px 16px;
       border-radius: 999px;
-      font-weight: 700;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .discord-btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
       color: var(--text);
-      background: linear-gradient(135deg, rgba(142, 197, 255, 0.15), rgba(126, 240, 214, 0.12));
-      border: 1px solid var(--border);
-      padding: 11px 16px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      font-weight: 600;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
-    .discord-btn:hover,
-    .primary-btn:hover,
-    .secondary-btn:hover,
-    .cta-btn:hover {
+    .discord-btn:hover{
       transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.3);
     }
 
-    .hero {
+    .hero{
       display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 28px;
-      padding: 42px;
-      margin-top: 30px;
+      padding: 42px 30px;
+      margin-top: 28px;
+      border-radius: 30px;
     }
 
-    .eyebrow {
+    .eyebrow{
       display: inline-block;
       margin-bottom: 18px;
-      color: var(--accent-2);
-      font-size: 0.76rem;
-      letter-spacing: 0.16em;
+      color: var(--muted);
       text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
       font-weight: 700;
     }
 
-    h1 {
-      font-size: clamp(2.7rem, 5vw, 5.2rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
+    h1{
+      font-size: clamp(2.8rem, 5vw, 5.4rem);
+      letter-spacing: -0.08em;
+      line-height: 0.96;
       margin-bottom: 18px;
+      max-width: 700px;
     }
 
-    .hero-text p {
+    .hero-copy p{
       color: var(--muted);
-      font-size: 1.06rem;
-      line-height: 1.8;
-      max-width: 640px;
+      font-size: 1.08rem;
+      line-height: 1.9;
+      max-width: 620px;
     }
 
-    .actions {
+    .hero-actions{
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin: 28px 0 30px;
+      margin: 30px 0 28px;
     }
 
     .primary-btn,
-    .secondary-btn {
+    .secondary-btn,
+    .cta-btn{
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
-    .primary-btn {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #07121d;
-      box-shadow: 0 16px 36px rgba(126, 240, 214, 0.22);
+    .primary-btn{
+      background: #ffffff;
+      color: #050505;
+      box-shadow: 0 16px 36px rgba(255,255,255,0.12);
     }
 
-    .secondary-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
+    .secondary-btn{
+      background: rgba(255,255,255,0.03);
       color: var(--text);
     }
 
-    .stats {
+    .cta-btn{
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      margin-top: 26px;
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .cta-btn:hover,
+    .discord-btn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .stats{
       list-style: none;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
+      margin-top: 10px;
     }
 
-    .stats li {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .stats li{
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 18px;
-      padding: 18px 16px;
+      padding: 18px 14px;
     }
 
-    .stats strong {
+    .stats strong{
       display: block;
-      margin-bottom: 8px;
       font-size: 1rem;
+      margin-bottom: 8px;
     }
 
-    .stats span {
+    .stats span{
       color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.7;
+      line-height: 1.6;
+      font-size: 0.78rem;
     }
 
-    .profile-card {
+    .profile-panel{
+      padding: 22px;
+      border-radius: 30px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 24px;
-      min-height: 100%;
     }
 
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 28px;
-      display: grid;
-      place-items: center;
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 18px;
-      background: linear-gradient(135deg, rgba(142, 197, 255, 0.28), rgba(126, 240, 214, 0.22));
-      border: 1px solid var(--border);
+    .profile-image{
+      width: 100%;
+      aspect-ratio: 1 / 1.15;
+      object-fit: cover;
+      border-radius: 22px;
+      filter: grayscale(1) contrast(1.1);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 38px rgba(0,0,0,0.35);
     }
 
-    .profile-card h3 {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
+    .profile-panel h3{
+      font-size: 1.7rem;
+      margin: 18px 0 10px;
     }
 
-    .profile-card p {
+    .profile-panel p{
       color: var(--muted);
       line-height: 1.8;
       font-size: 0.98rem;
     }
 
-    .content-grid {
+    .section{
+      margin-top: 28px;
+      padding: 28px 26px;
+      border-radius: 28px;
+    }
+
+    .two-col{
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 28px;
-      margin-top: 28px;
     }
 
-    .content-grid article {
-      padding: 28px 26px;
+    .section h2{
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 14px;
     }
 
-    .content-grid h2 {
-      font-size: 1.7rem;
-      margin-bottom: 12px;
-    }
-
-    .content-grid p,
-    .content-grid li {
+    .section p, .list li{
       color: var(--muted);
-      line-height: 1.82;
+      line-height: 1.9;
       font-size: 1rem;
     }
 
-    .content-grid ul {
+    .list{
       list-style: none;
       margin-top: 18px;
       display: grid;
       gap: 12px;
     }
 
-    .content-grid li::before {
-      content: "• ";
-      color: var(--accent-2);
+    .list li::before{
+      content: "•";
+      color: var(--white);
+      margin-right: 10px;
     }
 
-    .cards {
+    .showcase{
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .showcase .image-wrap{
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      min-height: 430px;
+      box-shadow: 0 22px 55px rgba(0,0,0,0.35);
+    }
+
+    .showcase img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) contrast(1.1);
+      transition: transform 0.7s ease;
+    }
+
+    .showcase:hover img{
+      transform: scale(1.04);
+    }
+
+    .cards{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 28px;
       margin-top: 28px;
     }
 
-    .cards article {
-      padding: 26px 22px;
+    .card{
+      padding: 24px 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.022);
+      border: 1px solid var(--line);
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
 
-    .cards h3 {
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .card .num{
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      text-transform: uppercase;
       margin-bottom: 12px;
-      font-size: 1.28rem;
     }
 
-    .cards p {
+    .card h3{
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card p{
       color: var(--muted);
       line-height: 1.8;
+      font-size: 0.95rem;
     }
 
-    .contact-section {
+    .pricing{
       margin-top: 28px;
-      padding: 34px 28px;
-      text-align: center;
+      padding: 30px 26px;
+      border-radius: 28px;
     }
 
-    .contact-section h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
+    .pricing-head{
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .pricing-head p{
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .pricing-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .price-card{
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card.featured{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.24);
+      box-shadow: 0 20px 44px rgba(255,255,255,0.04);
+    }
+
+    .price-card .tag{
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .price-card h3{
+      font-size: 1.5rem;
       margin-bottom: 12px;
     }
 
-    .contact-section p {
+    .price{
+      font-size: 2.5rem;
+      letter-spacing: -0.06em;
+      margin-bottom: 8px;
+    }
+
+    .currency{
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .price-card .note{
+      color: var(--soft);
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+
+    .price-card ul{
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 22px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .price-card ul li::before{
+      content: "✓";
+      color: var(--white);
+      margin-right: 10px;
+    }
+
+    .price-card .buy{
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+
+    .price-card .buy:hover{
+      transform: translateY(-1px);
+    }
+
+    .notice{
+      margin-top: 18px;
+      color: var(--soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .contact-section{
+      margin-top: 28px;
+      text-align: center;
+      padding: 34px 26px;
+      border-radius: 28px;
+    }
+
+    .contact-section h2{
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      letter-spacing: -0.06em;
+      margin-bottom: 12px;
+    }
+
+    .contact-section p{
+      color: var(--muted);
       max-width: 760px;
       margin: 0 auto;
-      color: var(--muted);
       line-height: 1.8;
-      font-size: 1.05rem;
+      font-size: 1.04rem;
     }
 
-    .cta-btn {
-      margin-top: 22px;
-      padding: 14px 22px;
-      background: linear-gradient(135deg, rgba(142, 197, 255, 0.14), rgba(126, 240, 214, 0.14));
-      border: 1px solid var(--border);
-      color: var(--text);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
-    }
-
-    footer {
-      margin-top: 26px;
+    footer{
+      padding: 26px 0 30px;
       text-align: center;
       color: var(--muted);
-      font-size: 0.9rem;
-      padding-bottom: 10px;
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 860px) {
-      header {
+    .reveal{
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px){
+      .hero, .two-col, .showcase, .pricing-grid, .cards{
+        grid-template-columns: 1fr;
+      }
+
+      .stats{
+        grid-template-columns: 1fr;
+      }
+
+      .nav{
         flex-wrap: wrap;
       }
 
-      nav {
+      .nav-links{
+        order: 3;
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
       }
-
-      .hero,
-      .content-grid,
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
     }
 
-    @media (max-width: 540px) {
-      .container {
-        width: min(100% - 16px, 1180px);
+    @media (max-width: 620px){
+      header{
+        top: 8px;
+        width: min(var(--maxw), calc(100% - 12px));
       }
 
-      .hero,
-      .content-grid article,
-      .cards article,
-      .contact-section {
+      .hero{
+        padding: 28px 18px;
+      }
+
+      .section, .pricing, .contact-section{
         padding-left: 18px;
         padding-right: 18px;
       }
 
-      .actions {
+      .hero-actions{
         flex-direction: column;
       }
 
-      .primary-btn,
-      .secondary-btn,
-      .discord-btn,
-      .cta-btn {
+      .primary-btn, .secondary-btn, .discord-btn, .cta-btn{
         width: 100%;
+      }
+
+      .pricing-head{
+        display: block;
+      }
+
+      .pricing-head p{
+        margin-top: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
+  <div class="noise"></div>
 
-  <div class="container">
-    <header class="glass">
-      <nav>
+  <header>
+    <div class="nav">
+      <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#pricing">Pricing</a>
         <a href="#contact">Contact</a>
-      </nav>
+      </div>
 
       <a class="discord-btn" href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer">
         Discord
       </a>
-    </header>
+    </div>
+  </header>
 
+  <div class="container">
     <main>
-      <section class="hero glass">
-        <div class="hero-text">
+      <section class="hero glass reveal">
+        <div class="hero-copy">
           <span class="eyebrow">Freelance developer</span>
-          <h1>Building clean, modern digital experiences.</h1>
-
+          <h1>Building polished things for the internet.</h1>
           <p>
-            I’m a website developer and Discord bot developer who enjoys turning ideas into useful,
-            stylish, and functional projects. I’m also learning graphic design, which helps me create
-            visuals that feel clean, creative, and professional.
+            I’m a website developer and Discord bot developer, and I’m also learning graphic design
+            to make everything I build more creative, cleaner, and more professional. I enjoy making
+            digital experiences that look premium and feel easy to use.
           </p>
 
-          <div class="actions">
+          <div class="hero-actions">
             <a class="primary-btn" href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer">
               DM to order
             </a>
-            <a class="secondary-btn" href="#about">Learn more</a>
+            <a class="secondary-btn" href="#pricing">View pricing</a>
           </div>
 
           <ul class="stats">
             <li>
-              <strong>Website Developer</strong>
-              <span>Modern, responsive websites built for businesses, creators, and online brands.</span>
+              <strong>Website dev</strong>
+              <span>Modern, responsive websites built for business and personal brands.</span>
             </li>
             <li>
-              <strong>Discord Bot Developer</strong>
-              <span>Custom bots for moderation, automation, community tools, and server features.</span>
+              <strong>Bot dev</strong>
+              <span>Custom Discord bots for automation, moderation, tools, and community growth.</span>
             </li>
             <li>
-              <strong>Graphic Design</strong>
-              <span>Learning design to strengthen branding, appearance, and visual creativity.</span>
+              <strong>Design</strong>
+              <span>Learning graphic design to improve visual quality and creative direction.</span>
             </li>
           </ul>
         </div>
 
-        <div class="profile-card glass">
-          <div class="avatar">14</div>
+        <div class="profile-panel glass reveal">
+          <img
+            class="profile-image"
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+            alt="Creative workspace"
+          />
           <h3>Young developer</h3>
           <p>
-            I’m 14 years old and passionate about learning, creating, and improving my skills.
-            I enjoy web development, Discord bot development, and growing in graphic design so I can
-            make every project look better and work better.
+            I’m 14 years old, and I love creating digital tools and experiences that help people online.
+            I focus on web development, Discord bot development, and constantly improving my design skills.
           </p>
         </div>
       </section>
 
-      <section id="about" class="content-grid">
-        <article class="glass">
-          <span class="eyebrow">About me</span>
-          <h2>Creative, curious, and always improving.</h2>
-          <p>
-            I focus on making digital work that feels clean, useful, and professional. I enjoy
-            building websites that look modern, making Discord bots that help communities run
-            smoothly, and learning design so I can make my work look even better.
-          </p>
-          <ul>
-            <li>Website developer with a strong focus on modern and clean design.</li>
-            <li>Discord bot developer who builds useful and engaging tools.</li>
-            <li>Learning graphic design to improve creativity and visual quality.</li>
-          </ul>
-        </article>
+      <section id="about" class="section glass reveal">
+        <div class="two-col">
+          <div>
+            <span class="eyebrow">About me</span>
+            <h2>Creative, curious, and always improving.</h2>
+            <p>
+              I build digital work that feels modern, clean, and easy to understand. My main focus is
+              website development and Discord bot development, but I’m also learning graphic design so
+              I can bring stronger visual ideas and better creative direction into everything I do.
+            </p>
+            <ul class="list">
+              <li>Website developer with a focus on minimal and modern layouts.</li>
+              <li>Discord bot developer creating tools for communities and servers.</li>
+              <li>Learning graphic design to improve aesthetics and branding.</li>
+            </ul>
+          </div>
 
-        <article class="glass">
-          <span class="eyebrow">What I do</span>
-          <h2>Services and focus.</h2>
-          <p>
-            I create clean websites, custom Discord bots, and digital work that is simple to use,
-            visually appealing, and built with care. I’m still growing as a developer, but I’m
-            passionate about producing quality work and learning every day.
-          </p>
-          <ul>
-            <li>Custom website development and landing pages.</li>
-            <li>Discord bot development and automation.</li>
-            <li>Design learning for better visuals and branding.</li>
-          </ul>
-        </article>
+          <div>
+            <span class="eyebrow">What I do</span>
+            <h2>Simple, functional, and polished.</h2>
+            <p>
+              I enjoy making projects that look premium while staying easy to use. Whether it’s a landing
+              page, a website, or a custom bot, I aim for clean structure, strong visuals, and smooth
+              experience across devices.
+            </p>
+            <ul class="list">
+              <li>Landing pages and personal branding websites.</li>
+              <li>Discord bots for communities and automation.</li>
+              <li>Creative mockups, visual ideas, and design learning.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <section id="services" class="cards">
-        <article class="glass">
-          <span class="eyebrow">01</span>
+      <section id="work" class="showcase reveal">
+        <div class="image-wrap glass">
+          <img
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+            alt="Modern workspace"
+          />
+        </div>
+
+        <div class="section glass">
+          <span class="eyebrow">Portfolio style</span>
+          <h2>Minimal, premium, and modern.</h2>
+          <p>
+            I focus on clean layouts, sharp contrast, and simple structure. My work aims to feel
+            high-end without being overcomplicated, combining a simple visual style with useful
+            functionality and a professional finishing touch.
+          </p>
+          <ul class="list">
+            <li>Black and white visual direction.</li>
+            <li>Modern interface layouts.</li>
+            <li>Clear and clean user experience.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cards reveal">
+        <article class="card">
+          <span class="num">01</span>
           <h3>Web Development</h3>
           <p>
-            I build simple, modern, and responsive websites that look polished and work smoothly.
+            I create clean, responsive websites with a modern style and a strong focus on readability,
+            atmosphere, and user experience.
           </p>
         </article>
 
-        <article class="glass">
-          <span class="eyebrow">02</span>
+        <article class="card">
+          <span class="num">02</span>
           <h3>Discord Bots</h3>
           <p>
-            Need moderation tools, server automation, giveaways, or custom commands? I can help build them.
+            Custom bots for moderation, automation, giveaways, commands, tools, and community features.
           </p>
         </article>
 
-        <article class="glass">
-          <span class="eyebrow">03</span>
-          <h3>Design Learning</h3>
+        <article class="card">
+          <span class="num">03</span>
+          <h3>Design Growth</h3>
           <p>
-            I’m learning graphic design to improve aesthetics, branding, and overall creative quality.
+            I’m building my graphic design knowledge to improve branding, layout, and visual creativity.
           </p>
         </article>
       </section>
 
-      <section id="contact" class="glass contact-section">
-        <span class="eyebrow">Order / Contact</span>
+      <section id="pricing" class="pricing glass reveal">
+        <div class="pricing-head">
+          <div>
+            <span class="eyebrow">Pricing</span>
+            <h2>Robux payment only right now</h2>
+          </div>
+          <p>
+            My commissions are currently closed, but I’m still taking interest and future inquiries.
+            At the moment, payments are accepted in Robux only.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>Basic</h3>
+            <div class="price"><span class="currency">RBX</span> 250</div>
+            <div class="note">For small requests</div>
+
+            <ul>
+              <li>Simple website layout</li>
+              <li>Custom design styling</li>
+              <li>Basic section setup</li>
+              <li>Small adjustments</li>
+            </ul>
+
+            <a href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer" class="buy">Message me</a>
+          </article>
+
+          <article class="price-card featured">
+            <div class="tag">Popular</div>
+            <h3>Standard</h3>
+            <div class="price"><span class="currency">RBX</span> 600</div>
+            <div class="note">For mid-sized projects</div>
+
+            <ul>
+              <li>Full landing page</li>
+              <li>Custom layout design</li>
+              <li>Website responsiveness</li>
+              <li>Extra polish and tweaks</li>
+            </ul>
+
+            <a href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer" class="buy">Message me</a>
+          </article>
+
+          <article class="price-card">
+            <h3>Premium</h3>
+            <div class="price"><span class="currency">RBX</span> 1200</div>
+            <div class="note">For larger or custom jobs</div>
+
+            <ul>
+              <li>Advanced custom website</li>
+              <li>More pages or sections</li>
+              <li>Enhanced visual polish</li>
+              <li>Priority attention</li>
+            </ul>
+
+            <a href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer" class="buy">Message me</a>
+          </article>
+        </div>
+
+        <div class="notice">Robux only • commissions closed • dm to order</div>
+      </section>
+
+      <section id="contact" class="contact-section glass reveal">
+        <span class="eyebrow">Contact</span>
         <h2>Message me on Discord to order.</h2>
         <p>
-          To order a project or ask about work, send me a direct message on Discord. My commissions
-          are currently closed, but you can still reach out to ask about future availability,
-          collaborations, or potential projects.
+          If you want a website, bot, or custom project, DM me through Discord. Commissions are currently
+          closed, but you can still reach out and ask about future availability, custom requests, or
+          potential collaborations.
         </p>
         <a class="cta-btn" href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer">
           Open Discord Profile
@@ -524,12 +822,22 @@
     </main>
 
     <footer>
-      © <span id="year"></span> Portfolio
+      All rights reserved.
     </footer>
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
