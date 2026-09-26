@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Portfolio</title>
+  <style>
+    :root {
+      --bg-1: #070b16;
+      --bg-2: #101827;
+      --glass: rgba(255, 255, 255, 0.07);
+      --glass-strong: rgba(255, 255, 255, 0.11);
+      --border: rgba(255, 255, 255, 0.15);
+      --text: #edf6ff;
+      --muted: #bfd0e8;
+      --accent: #8ec5ff;
+      --accent-2: #7ef0d6;
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(142, 197, 255, 0.18), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(126, 240, 214, 0.15), transparent 25%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-orb {
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      background: #4ea3ff;
+      top: 8%;
+      left: 10%;
+    }
+
+    .orb-2 {
+      background: #5fead2;
+      bottom: 8%;
+      right: 12%;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 26px 0 60px;
+    }
+
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+      border-radius: 26px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      margin-top: 8px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin: 0 auto;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .discord-btn,
+    .primary-btn,
+    .secondary-btn,
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .discord-btn {
+      color: var(--text);
+      background: linear-gradient(135deg, rgba(142, 197, 255, 0.15), rgba(126, 240, 214, 0.12));
+      border: 1px solid var(--border);
+      padding: 11px 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .discord-btn:hover,
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 28px;
+      padding: 42px;
+      margin-top: 30px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent-2);
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 5vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 28px 0 30px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 14px 22px;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07121d;
+      box-shadow: 0 16px 36px rgba(126, 240, 214, 0.22);
+    }
+
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .stats {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .stats li {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px 16px;
+    }
+
+    .stats strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .stats span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px;
+      min-height: 100%;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(142, 197, 255, 0.28), rgba(126, 240, 214, 0.22));
+      border: 1px solid var(--border);
+    }
+
+    .profile-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .content-grid article {
+      padding: 28px 26px;
+    }
+
+    .content-grid h2 {
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+    }
+
+    .content-grid p,
+    .content-grid li {
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: 1rem;
+    }
+
+    .content-grid ul {
+      list-style: none;
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .content-grid li::before {
+      content: "• ";
+      color: var(--accent-2);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .cards article {
+      padding: 26px 22px;
+    }
+
+    .cards h3 {
+      margin-bottom: 12px;
+      font-size: 1.28rem;
+    }
+
+    .cards p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-section {
+      margin-top: 28px;
+      padding: 34px 28px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .contact-section p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .cta-btn {
+      margin-top: 22px;
+      padding: 14px 22px;
+      background: linear-gradient(135deg, rgba(142, 197, 255, 0.14), rgba(126, 240, 214, 0.14));
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    footer {
+      margin-top: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-bottom: 10px;
+    }
+
+    @media (max-width: 860px) {
+      header {
+        flex-wrap: wrap;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero,
+      .content-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .container {
+        width: min(100% - 16px, 1180px);
+      }
+
+      .hero,
+      .content-grid article,
+      .cards article,
+      .contact-section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .primary-btn,
+      .secondary-btn,
+      .discord-btn,
+      .cta-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <div class="container">
+    <header class="glass">
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="discord-btn" href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer">
+        Discord
+      </a>
+    </header>
+
+    <main>
+      <section class="hero glass">
+        <div class="hero-text">
+          <span class="eyebrow">Freelance developer</span>
+          <h1>Building clean, modern digital experiences.</h1>
+
+          <p>
+            I’m a website developer and Discord bot developer who enjoys turning ideas into useful,
+            stylish, and functional projects. I’m also learning graphic design, which helps me create
+            visuals that feel clean, creative, and professional.
+          </p>
+
+          <div class="actions">
+            <a class="primary-btn" href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer">
+              DM to order
+            </a>
+            <a class="secondary-btn" href="#about">Learn more</a>
+          </div>
+
+          <ul class="stats">
+            <li>
+              <strong>Website Developer</strong>
+              <span>Modern, responsive websites built for businesses, creators, and online brands.</span>
+            </li>
+            <li>
+              <strong>Discord Bot Developer</strong>
+              <span>Custom bots for moderation, automation, community tools, and server features.</span>
+            </li>
+            <li>
+              <strong>Graphic Design</strong>
+              <span>Learning design to strengthen branding, appearance, and visual creativity.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="profile-card glass">
+          <div class="avatar">14</div>
+          <h3>Young developer</h3>
+          <p>
+            I’m 14 years old and passionate about learning, creating, and improving my skills.
+            I enjoy web development, Discord bot development, and growing in graphic design so I can
+            make every project look better and work better.
+          </p>
+        </div>
+      </section>
+
+      <section id="about" class="content-grid">
+        <article class="glass">
+          <span class="eyebrow">About me</span>
+          <h2>Creative, curious, and always improving.</h2>
+          <p>
+            I focus on making digital work that feels clean, useful, and professional. I enjoy
+            building websites that look modern, making Discord bots that help communities run
+            smoothly, and learning design so I can make my work look even better.
+          </p>
+          <ul>
+            <li>Website developer with a strong focus on modern and clean design.</li>
+            <li>Discord bot developer who builds useful and engaging tools.</li>
+            <li>Learning graphic design to improve creativity and visual quality.</li>
+          </ul>
+        </article>
+
+        <article class="glass">
+          <span class="eyebrow">What I do</span>
+          <h2>Services and focus.</h2>
+          <p>
+            I create clean websites, custom Discord bots, and digital work that is simple to use,
+            visually appealing, and built with care. I’m still growing as a developer, but I’m
+            passionate about producing quality work and learning every day.
+          </p>
+          <ul>
+            <li>Custom website development and landing pages.</li>
+            <li>Discord bot development and automation.</li>
+            <li>Design learning for better visuals and branding.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="services" class="cards">
+        <article class="glass">
+          <span class="eyebrow">01</span>
+          <h3>Web Development</h3>
+          <p>
+            I build simple, modern, and responsive websites that look polished and work smoothly.
+          </p>
+        </article>
+
+        <article class="glass">
+          <span class="eyebrow">02</span>
+          <h3>Discord Bots</h3>
+          <p>
+            Need moderation tools, server automation, giveaways, or custom commands? I can help build them.
+          </p>
+        </article>
+
+        <article class="glass">
+          <span class="eyebrow">03</span>
+          <h3>Design Learning</h3>
+          <p>
+            I’m learning graphic design to improve aesthetics, branding, and overall creative quality.
+          </p>
+        </article>
+      </section>
+
+      <section id="contact" class="glass contact-section">
+        <span class="eyebrow">Order / Contact</span>
+        <h2>Message me on Discord to order.</h2>
+        <p>
+          To order a project or ask about work, send me a direct message on Discord. My commissions
+          are currently closed, but you can still reach out to ask about future availability,
+          collaborations, or potential projects.
+        </p>
+        <a class="cta-btn" href="https://discordapp.com/users/1365718664506249312" target="_blank" rel="noreferrer">
+          Open Discord Profile
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Portfolio
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
